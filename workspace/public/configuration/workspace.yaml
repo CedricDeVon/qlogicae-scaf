@@ -1,0 +1,78 @@
+
+data:
+  selection:
+    is-enabled: true
+
+    target: "typescript"
+
+    default:
+      targets:
+        - all
+        - root
+        - project
+
+    project:
+      targets:
+
+    full-path:
+      root: "${{ current-root-full-path }}"
+
+
+  script:
+    is-enabled: true
+
+    types:
+      - individual
+      - collection
+
+    targets:
+      all-value-cache-debug:
+        enter-full-path: "${{ current-root-full-path }}/workspace/public/toolset"
+        type: "individual"
+        commands:
+          - "python3 -c \"
+            from library import workspace_manager, value_cache_storage_manager;
+            workspace_manager.singleton.setup();
+            value_cache_storage_manager.singleton.display_all_items();
+            workspace_manager.singleton.shutdown();\""
+
+
+    clean:
+      is-enabled: true
+
+      exclude:
+        targets:
+          - "${{ current-root-full-path }}"
+          - "${{ current-root-full-path }}/selection"
+          - "${{ current-root-full-path }}/workspace"
+          - "${{ current-root-full-path }}/.github"    
+
+      include:
+        targets:
+          root-temporary:
+            - "${{ current-root-full-path }}/workspace/private/temporary"
+
+
+  log:
+    is-enabled: true
+
+    targets:
+      - "${{ current-root-full-path }}/workspace/private/temporary/log/${{ current-date }}.log"            
+
+  macros:  
+    value-cache:
+      - current-date
+      - current-year
+      - current-root-full-path
+      
+    file:
+      root-project-name: "Project"
+
+      company-name: "Company"
+      
+      author-name: "Author"
+      
+      author-email: "email@gmail.com"
+
+metadata:
+
