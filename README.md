@@ -1,2 +1,2 @@
-# qlogicae_scaf
+# QLogicae Scaf
 Template documentation storage for QLogicae-integrated applications
