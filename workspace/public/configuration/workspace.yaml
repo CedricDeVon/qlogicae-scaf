@@ -3,7 +3,7 @@ data:
   selection:
     is-enabled: true
 
-    target: "typescript"
+    target: "root"
 
     default:
       targets:
@@ -46,6 +46,7 @@ data:
           - "${{ current-root-full-path }}/selection"
           - "${{ current-root-full-path }}/workspace"
           - "${{ current-root-full-path }}/.github"    
+          - "${{ current-root-full-path }}/.temporary"    
 
       include:
         targets:
@@ -66,11 +67,13 @@ data:
       - current-root-full-path
       
     file:
-      root-project-name: "Project"
+      root-project-name: "Project Name"
 
-      company-name: "Company"
+      company-name: "Company Name"
       
-      author-name: "Author"
+      author-name: "Author Name"
+
+      project-description: "Project Description"
       
       author-email: "email@gmail.com"
 
