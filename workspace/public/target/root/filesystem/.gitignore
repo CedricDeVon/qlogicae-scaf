@@ -20,4 +20,3 @@ reports/
 __pycache__/
 .ruff_cache/
 
-workspace/private/

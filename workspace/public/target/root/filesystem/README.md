@@ -7,7 +7,7 @@
 </br>
 
 <div style="text-align: center;">
-  <h1>${{ root-project-name }}</h1>
+  <h1>${{ project-name }}</h1>
   <p style="font-style: italic;">${{ project-description }}</p>
 <div style="margin: 32px 64px;">
 

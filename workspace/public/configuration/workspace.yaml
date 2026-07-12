@@ -3,79 +3,93 @@ data:
   selection:
     is-enabled: true
 
-    target: "root"
-
     default:
+      name: root
       targets:
-        - all
-        - root
-        - project
+        all:
+          full-path: ${{ current-root-full-path }}
+
+        root:
+          full-path: ${{ current-root-full-path }}
+
+        project:
+          full-path: ${{ current-root-full-path }}
 
     project:
       targets:
 
-    full-path:
-      root: "${{ current-root-full-path }}"
-
-
   script:
-    is-enabled: true
-
-    types:
-      - individual
-      - collection
+    is-enabled: true    
+    process: shell
+    is-process-override-enabled: false
 
     targets:
-      all-value-cache-debug:
-        enter-full-path: "${{ current-root-full-path }}/workspace/public/toolset"
-        type: "individual"
+      value-cache-debug:
+        enter-full-path: ${{ current-root-full-path }}/workspace/public/toolset/qlogicae-logis
         commands:
-          - "python3 -c \"
-            from library import workspace_manager, value_cache_storage_manager;
-            workspace_manager.singleton.setup();
-            value_cache_storage_manager.singleton.display_all_items();
-            workspace_manager.singleton.shutdown();\""
-
+          - run: "python3 -c \"
+              from qlogicae_logis.v1 import workspace_manager;
+              workspace_manager.singleton.debug_value_cache();\""
+            is-enabled: true
 
     clean:
       is-enabled: true
 
       exclude:
         targets:
-          - "${{ current-root-full-path }}"
-          - "${{ current-root-full-path }}/selection"
-          - "${{ current-root-full-path }}/workspace"
-          - "${{ current-root-full-path }}/.github"    
-          - "${{ current-root-full-path }}/.temporary"    
+          - name: ${{ current-root-full-path }}
+          - name: ${{ current-root-full-path }}/selection
+          - name: ${{ current-root-full-path }}/workspace
+          - name: ${{ current-root-full-path }}/.github  
+          - name: ${{ current-root-full-path }}/.temporary            
 
       include:
         targets:
           root-temporary:
-            - "${{ current-root-full-path }}/workspace/private/temporary"
+            - name: ${{ current-root-full-path }}/workspace/private/temporary
 
+  time:
+    zone: local
 
   log:
     is-enabled: true
+    is-override-enabled: false
+    is-verbose-enabled: true
+    is-verbose-override-enabled: false
 
-    targets:
-      - "${{ current-root-full-path }}/workspace/private/temporary/log/${{ current-date }}.log"            
+    file:
+      is-enabled: true
+      is-verbose-enabled: true
+      targets:
+        - name: ${{ current-root-full-path }}/workspace/private/temporary/log/${{ current-date }}.log            
+
+    console:
+      is-enabled: true
+      is-verbose-enabled: false
 
   macros:  
     value-cache:
-      - current-date
-      - current-year
-      - current-root-full-path
-      
+      targets:
+        - name: current-date
+        - name: current-year
+        - name: current-root-full-path
+
     file:
-      root-project-name: "Project Name"
+      targets:
+        - name: company-name
+          value: Company Name
 
-      company-name: "Company Name"
-      
-      author-name: "Author Name"
+        - name: project-name
+          value: Project Name
 
-      project-description: "Project Description"
+        - name: project-description
+          value: Project Description
       
-      author-email: "email@gmail.com"
+        - name: author-name
+          value: Author Name
+      
+        - name: author-email
+          value: email@gmail.com
 
 metadata:
 
