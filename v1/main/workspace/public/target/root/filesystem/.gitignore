@@ -14,9 +14,5 @@ dist/
 .build/
 build/
 reports/
-*reports/
-
-
-__pycache__/
-.ruff_cache/
+.reports/
 

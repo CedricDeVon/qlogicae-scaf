@@ -82,9 +82,15 @@ data:
         - name: project-name
           value: Project Name
 
+        - name: project-version
+          value: v1.0.0
+
         - name: project-description
           value: Project Description
       
+        - name: project-logo-filesystem-path
+          value: ./project/asset/qlogicae1.png
+
         - name: author-name
           value: Author Name
       
